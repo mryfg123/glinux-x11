@@ -52,13 +52,17 @@ jobs:
       run: git submodule update --init --recursive --jobs 8 --depth 1
 
     - name: Build
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug -x :shell-loader:buildCompanionPackage
     - name: Store app-universal-debug
       uses: actions/upload-artifact@v7
       with:
         name: glinux-universal-debug
         path: ./lorie-app/build/outputs/apk/standalone/debug/glinux-universal-debug.apk
-
+    - name: Store loader.apk
+      uses: actions/upload-artifact@v4
+      with:
+        name: glinux-loader-debug
+        path: ./shell-loader/build/outputs/apk/debug/*.apk
     - name: Store sharedUid-debug APK
       uses: actions/upload-artifact@v7
       with:
