@@ -116,11 +116,7 @@ static jboolean start(JNIEnv *env, jobject self, jobjectArray args) {
     }
 
     // No matter what tracer is attached.
-    // In the case of gdb or lldb LD_PRELOAD is already set.
-    // In the case of proot or proot-distro libtermux-exec in LD_PRELOAD will break linking.
-    if (access("/data/data/com.termux/files/usr/lib/libtermux-exec.so", F_OK) == 0 && !detectTracer()
-            && !getenv("XSTARTUP_LD_PRELOAD"))
-        setenv("LD_PRELOAD", "/data/data/com.termux/files/usr/lib/libtermux-exec.so", 1);
+
 
     // adb sets TMPDIR to /data/local/tmp which is pretty useless.
     if (!strcmp("/data/local/tmp", getenv("TMPDIR") ?: ""))
@@ -129,8 +125,8 @@ static jboolean start(JNIEnv *env, jobject self, jobjectArray args) {
     if (!getenv("TMPDIR")) {
         if (access("/tmp", F_OK) == 0)
             setenv("TMPDIR", "/tmp", 1);
-        else if (access("/data/data/com.termux/files/usr/tmp", F_OK) == 0)
-            setenv("TMPDIR", "/data/data/com.termux/files/usr/tmp", 1);
+        else if (access("/data/local/tmp/glinux/tmp", F_OK) == 0)
+            setenv("TMPDIR", "/data/local/tmp/glinux/tmp", 1);
     }
 
     if (!getenv("TMPDIR")) {
@@ -187,10 +183,10 @@ static jboolean start(JNIEnv *env, jobject self, jobjectArray args) {
         else if (access("/usr/share/X11/xkb", F_OK) == 0)
             setenv("XKB_CONFIG_ROOT", "/usr/share/X11/xkb", 1);
         // Termux case
-        else if (access("/data/data/com.termux/files/usr/share/xkeyboard-config-2", F_OK) == 0)
-            setenv("XKB_CONFIG_ROOT", "/data/data/com.termux/files/usr/share/xkeyboard-config-2", 1);
-        else if (access("/data/data/com.termux/files/usr/share/X11/xkb", F_OK) == 0)
-            setenv("XKB_CONFIG_ROOT", "/data/data/com.termux/files/usr/share/X11/xkb", 1);
+        else if (access("/data/local/tmp/glinux/share/xkeyboard-config-2", F_OK) == 0)
+            setenv("XKB_CONFIG_ROOT", "/data/local/tmp/glinux/share/xkeyboard-config-2", 1);
+        else if (access("/data/local/tmp/glinux/share/X11/xkb", F_OK) == 0)
+            setenv("XKB_CONFIG_ROOT", "/data/local/tmp/glinux/share/X11/xkb", 1);
     }
 
     if (!getenv("XKB_CONFIG_ROOT")) {
