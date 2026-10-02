@@ -59,7 +59,7 @@ jobs:
         name: glinux-universal-debug
         path: ./lorie-app/build/outputs/apk/standalone/debug/glinux-universal-debug.apk
     - name: Store loader.apk
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: glinux-loader-debug
         path: ./shell-loader/build/outputs/apk/debug/*.apk
