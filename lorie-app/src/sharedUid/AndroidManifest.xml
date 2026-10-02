@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:sharedUserId="com.termux"
+    tools:ignore="Deprecated">
+    <application>
+        <!-- Keeps glinux's process from being classified separately from termux's own cpuset. -->
+        <activity android:name="com.glinux.MainActivity" android:process="com.termux" />
+        <activity android:name="com.glinux.LoriePreferences" android:process="com.termux" />
+        <service android:name="com.glinux.utils.KeyInterceptor" android:process="com.termux" />
+        <receiver android:name="com.glinux.LorieApp$Receiver" android:process="com.termux" />
+        <receiver android:name="com.glinux.LoriePreferences$Receiver" android:process="com.termux" />
+    </application>
+</manifest>
