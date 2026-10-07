@@ -54,23 +54,23 @@ jobs:
     - name: Build
       run: ./gradlew assembleDebug -x :shell-loader:buildCompanionPackage
     - name: Store app-universal-debug
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v6
       with:
         name: glinux-universal-debug
         path: ./lorie-app/build/outputs/apk/standalone/debug/glinux-universal-debug.apk
     - name: Store loader.apk
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: glinux-loader-debug
         path: ./shell-loader/build/outputs/apk/debug/*.apk
     - name: Store sharedUid-debug APK
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v6
       with:
         name: glinux-sharedUid-debug
         path: ./lorie-app/build/outputs/apk/sharedUid/debug/glinux-universal-sharedUid-debug.apk
 
     - name: Store companion package
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v6
       with:
         name: termux-companion packages
         path: |
@@ -78,7 +78,7 @@ jobs:
           ./shell-loader/build/outputs/companion/glinux-*-any.pkg.tar.xz
 
     - name: Store unstripped libraries with debug symbols
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v6
       with:
         name: glinux-unstripped-libraries-for-ndk-stack
         path: ./lorie/build/intermediates/cxx/Debug/*
